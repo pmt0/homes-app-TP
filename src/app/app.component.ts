@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
-
+import { HousingService } from './housing.service';
 
 @Component({
   standalone: true,
@@ -15,10 +14,9 @@ import { Router } from '@angular/router';
       </a>
     </header>
     <section class="content">
-      <router-outlet></router-outlet>
+      <router-outlet class="listing"></router-outlet>
     </section>
-  </main>
-  
+  </main>  
   `,
   styleUrls: ['./app.component.css'],
   imports: [HomeComponent, RouterModule]
@@ -26,3 +24,16 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'homes';
 }
+
+
+
+
+// export class SearchComponent implements OnInit{
+//   searchValue: string = '';
+//   constructor(private housingService: HousingService) { }
+//   ngOnInit(): void {
+// }
+// fetchData() {
+//   this.housingService.getAllHousingLocations(this.searchValue).subscribe;
+// }
+// }

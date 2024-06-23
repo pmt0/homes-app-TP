@@ -23,6 +23,7 @@ return await data.json() ?? [];
   submitApplication(firstName: string, lastName: string, email: string) {
     console.log('Reserva recivida: ' + firstName + ' ' + lastName + ' ' + email);
 }
+
 }
 
 
