@@ -12,7 +12,7 @@ constructor() { }
  
   async getAllHousingLocations(): Promise<HousingLocation[]> {
     const data = await fetch(this.url);
-return await data.json() ?? [];
+    return await data.json() ?? [];
   }
 
   async getHousingLocationById(id:Number): Promise<HousingLocation | undefined> {

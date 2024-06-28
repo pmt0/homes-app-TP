@@ -1,19 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../housing-location';
 import { HousingService } from '../housing.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent],
+  imports: [CommonModule, HousingLocationComponent, FormsModule],
   template: `
     <section>
       <form >
-        <input type="text" id="searchInput" placeholder="búsqueda" />
-        <button class="search" type="button">Buscar</button> 
-        <!-- (click)="displayResults()"  ????? -->
+        <input type="text" id="searchInput" [(ngModel)]="searchInput" [ngModelOptions]="{standalone: true}" placeholder="búsqueda" />
+        <button class="search" type="button" (click)="displayResults(searchInput)">Buscar</button> 
         <div id="results"></div>
         <script src="/src/app/search.ts"></script>
       </form>
@@ -24,17 +25,28 @@ import { HousingService } from '../housing.service';
   `,
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent {
+
+  searchInput:string = '';
+  url = 'http://localhost:3000/locations';
+
   housingLocationList: HousingLocation[] = [];
-housingService: HousingService = inject(HousingService);
+  housingService: HousingService = inject(HousingService);
+  
+  async displayResults(searchInput: any){
+        
+      const data = await fetch(this.url);
+      console.log('En el cuadro se ingreso:', this.searchInput)
+      return await data.json() ?? [];    
+  };
 
 constructor() {
 this.housingService.getAllHousingLocations().then((housingLocationList:HousingLocation[])=>{
 this.housingLocationList = housingLocationList;
 });
- }
 }
-
+}
 
 // intentos de busqueda  vvv
 
@@ -69,10 +81,7 @@ this.housingLocationList = housingLocationList;
 //   }
 // }
 
-
-
 // otro intento vvv
-
 
 // // URL  API
 // const apiUrl = 'http://localhost:3000/locations'; 
