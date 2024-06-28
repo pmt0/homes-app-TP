@@ -10,7 +10,7 @@ import { HousingService } from './housing.service';
   <main>
     <header class="brand-name">      
       <a href="/">
-      <img class= "brand-logo" src="./assets/logo.svg" alt="logo" aria-hidden="true" >
+      <img class= "brand-logo" src="./assets/vector-home-icon.jpg" alt="logo" aria-hidden="true" >
       </a>
     </header>
     <section class="content">
